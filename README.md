@@ -12,4 +12,4 @@ devices I do own and have documented so far:
  - Cubietruck (pothos).
  - Samsung ARM Chromebook (eros).
  - IFC6410 [ordered].
-
+ - Radxa Rock Pro
