@@ -29,3 +29,6 @@ The current status of running Gentoo Linux of the device can be found
 
 - https://wiki.gentoo.org/wiki/User:Mrueg/Radxa_Rock
 - http://radxa.com/Rock/Booting_Linux
+- http://androtab.info/radxa_rock/
+- http://androtab.info/miniroot/
+- http://wiki.t-firefly.com/index.php/Firefly-RK3288/Build_Ubuntu_rfs
