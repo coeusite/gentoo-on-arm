@@ -23,11 +23,10 @@ Alternative plan is to make a Gentoo rootfs image. See this one for details: htt
 ## Network tools
 - For lsusb, 
 ```emerge -j4 --ask sys-apps/usbutils 	sys-apps/lshw	sys-apps/pciutils```
-- Rock Pro uses Realtek RTL8723AU wifi chipset with Support Added To Linux 3.15 through r8723au kernel driver
-- However, rock pro only contains a kernel of linux 3.0.36.
-- In this case, I do doubt whether wifi is OOB or not.
+- Rock Pro uses Realtek RTL8723AU wifi chipset, whose support is added to Linux 3.15 through r8723au kernel driver.
+However, rock pro only contains a kernel of linux 3.0.36, and therefore, I do doubt whether wifi is OOB or not.
 - https://wiki.gentoo.org/wiki/Lenovo_IdeaPad_yoga_13_(i5)
-- commands:
+- some wireless-tools:
 ```
 emerge -j4 --ask sys-kernel/linux-firmware
 emerge -j4 --ask net-wireless/wireless-tools net-wireless/iw
@@ -39,7 +38,7 @@ emerge -j4 --ask dhcpd
 emerge -j4 --ask net-misc/networkmanager
 ```
 ## Driver for WiFi adapter
-It seems Gentoo rootfs does not contain wifi driver (ethernet seems to be recognized).  
+It seems Gentoo rootfs does not contain wifi driver (ethernet seems to be OK).  
 In this case, you may ethier build corresponding kernel modules after flashing img with Ethernet, 
     or build those modules somewhere else and copy them to the image.
 - Build kernel modules
@@ -54,7 +53,7 @@ In this case, you may ethier build corresponding kernel modules after flashing i
     - ```/sbin/depmod -a 3.0.36+ && modprobe 8723au```
     
 
-- Build driver & etc
+- Build drivers (NO NEED! Kernel modules contain following drivers.)
 ```
 cd /usr/src/driver
 git clone https://github.com/lwfinger/rtl8723au.git
