@@ -1,11 +1,19 @@
 # What does work?
 - Gentoo Rootfs
 - NAND / SD card
+- USB (Keyboard / Mouse)
+- HDMI (ok in console)
+- Wifi
 
 # What doesn't work?
-- Wifi + BT
 
 # What hasn't been tested?
-- Ethernet
+- Ethernet (seems working)
+- Bluetooth (seems working)
+- USB OTG
+- Mali400
+- LED
+- RTC
+- 80 pins
 
 # Upstream progress

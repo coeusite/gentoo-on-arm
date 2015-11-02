@@ -20,12 +20,19 @@ Alternative plan is to make a Gentoo rootfs image. See this one for details: htt
     - boot.img 0x8000
     - rootfs.img 0xe3a000
 
-## Network tools
+## Portage Setting ```/etc/portage/make.conf```
+Credit to Mrueg: https://wiki.gentoo.org/wiki/User:Mrueg/Radxa_Rock
+```
+CHOST="armv7a-hardfloat-linux-gnueabi"
+CFLAGS="-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard -fomit-frame-pointer -O2 -pipe"
+CXXFLAGS="${CFLAGS}"
+```
+You may try ```-mfpu=neon-vfpv4``` or ```-mfpu=neon-fp16``` instead of ```-mfpu=neon```, which is not recommended.  
+You may add ```MAKEOPTS=--jobs 5 --load-average 4``` for parallel tasks, and if it leads to an error, use ```emerge -j1``` to fix it temporarily.  
+
+## Some tools
 - For lsusb, 
 ```emerge -j4 --ask sys-apps/usbutils 	sys-apps/lshw	sys-apps/pciutils```
-- Rock Pro uses Realtek RTL8723AU wifi chipset, whose support is added to Linux 3.15 through r8723au kernel driver.
-However, rock pro only contains a kernel of linux 3.0.36, and therefore, I do doubt whether wifi is OOB or not.
-- https://wiki.gentoo.org/wiki/Lenovo_IdeaPad_yoga_13_(i5)
 - some wireless-tools:
 ```
 emerge -j4 --ask sys-kernel/linux-firmware
@@ -41,6 +48,7 @@ emerge -j4 --ask net-misc/networkmanager
 It seems Gentoo rootfs does not contain wifi driver (ethernet seems to be OK).  
 In this case, you may ethier build corresponding kernel modules after flashing img with Ethernet, 
     or build those modules somewhere else and copy them to the image.
+- IMPORTANT: Manually correct the date and time...(I didn't install a battery on it)...
 - Build kernel modules
     - ```emerge --ask dev-vcs/git```
     - Clone subbranch radxa-stable-3.0 for Rock Pro to /usr/src.
@@ -51,21 +59,5 @@ In this case, you may ethier build corresponding kernel modules after flashing i
     - Build those kernel modules ```mkdir modules && make INSTALL_MOD_PATH=./modules modules modules_install```
     - ```ln -s /usr/src/linux/modules/lib/modules/3.0.36+ /lib/modules/3.0.36+```
     - ```/sbin/depmod -a 3.0.36+ && modprobe 8723au```
-    
-
-- Build drivers (NO NEED! Kernel modules contain following drivers.)
-```
-cd /usr/src/driver
-git clone https://github.com/lwfinger/rtl8723au.git
-cd rtl8723au/
-make -j4 
-make install && modprobe rtl8723au
-
-git clone https://github.com/lwfinger/rtl8723au_bt.git
-cd rtl8723au_bt/
-make -j4
-make install
-```
-
-
-## Last Question: How to boot Gentoo instead of Rabian?
+    - Reboot.
+    - ``nmcli dev wifi connect MY-ACCESS-POINT password MY-PASSWORD``

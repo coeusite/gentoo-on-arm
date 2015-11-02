@@ -12,8 +12,8 @@ The Radxa Rock Pro is enhanced with the following hardware:
  - 150Mbps 802.11b/g/n with antenna
  - Bluetooth 4.0
  - 2 USB 2.0 standard A type,  	USB OTG micro-USB connector
- - Support self defined IR remote
- - IR: Serial Console for debugging
+ - IR: Support self defined IR remote
+ - Serial Console for debugging
  - Led: 3 programable leds
  - RTC: Support power off alarm
  - 80 pins including GPIO, I2C, SPI, Line in, USB 2.0, PWM, ADC, LCD, etc
