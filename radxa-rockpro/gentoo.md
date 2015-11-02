@@ -28,8 +28,12 @@ CFLAGS="-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard -fomit-frame
 CXXFLAGS="${CFLAGS}"
 ```
 You may try ```-mfpu=neon-vfpv4``` or ```-mfpu=neon-fp16``` instead of ```-mfpu=neon```, which is not recommended.  
-You may add ```MAKEOPTS=--jobs 5 --load-average 4``` for parallel tasks, and if it leads to an error, use ```emerge -j1``` to fix it temporarily.  
-
+You may add following for parallel tasks, and if it leads to an error, use ```emerge -j1``` to fix it temporarily.  
+```
+MAKEOPTS="-j5 -l4"
+EMERGE_DEFAULT_OPTS="--jobs=4 --load-average=4"
+```
+You may add ```smp``` to USE variable for multicore support.
 ## Some tools
 - For lsusb, 
 ```emerge -j4 --ask sys-apps/usbutils 	sys-apps/lshw	sys-apps/pciutils```
@@ -61,3 +65,13 @@ In this case, you may ethier build corresponding kernel modules after flashing i
     - ```/sbin/depmod -a 3.0.36+ && modprobe 8723au```
     - Reboot.
     - ``nmcli dev wifi connect MY-ACCESS-POINT password MY-PASSWORD``
+
+## Install NTP
+Try ```emerge --ask net-misc/ntp``` first. 
+If you encounter circular dependency for dev-lang/perl, enforce installation of dev-lang/perl first and reinstall it again.
+Commands below do work for me (temporary USE flag does't work for me: ```USE='...' emerge...```).
+```
+emerge --ask dev-lang/perl --nodeps
+# emerge --ask dev-lang/perl
+emerge --ask net-misc/ntp
+```

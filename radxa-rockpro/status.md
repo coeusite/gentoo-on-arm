@@ -2,12 +2,12 @@
 - Gentoo Rootfs
 - NAND / SD card
 - USB (Keyboard / Mouse)
-- HDMI (ok in console)
 - Wifi
 
 # What doesn't work?
 
 # What hasn't been tested?
+- HDMI (works in console)
 - Ethernet (seems working)
 - Bluetooth (seems working)
 - USB OTG
